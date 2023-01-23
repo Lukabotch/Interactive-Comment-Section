@@ -1,0 +1,19 @@
+  <div class="myComment">
+    <div class="currentUser">
+      <img
+        src="../assets/avatars/image-juliusomo.png"
+        alt=""
+        class="currentUserImg"
+        width="35"
+        height="35"
+      />
+      <textarea
+        name="inputContent"
+        id=""
+        class="myTextarea"
+        [(ngModel)]="inputContent"
+        placeholder="Add a comment"
+      ></textarea>
+      <button class="send" (click)="addComment()">SEND</button>
+    </div>
+  </div>

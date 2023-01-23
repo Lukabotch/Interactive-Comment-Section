@@ -1,0 +1,87 @@
+<div class="replies" id="">
+  <div class="rating">
+    <img
+      src="../../../assets/icon-plus.svg"
+      alt=""
+      class="plus"
+      (click)="increaseRating(index,mainInd)"
+    />
+    <span>{{jsonData.comments[mainInd].replies[index].score }}</span>
+    <img
+      src="../../../assets/icon-minus.svg"
+      alt=""
+      class="minus"
+      (click)="decreaseRating(index,mainInd)"
+    />
+  </div>
+  <div class="userpage">
+    <div class="userheader">
+      <div class="usernav">
+        <img
+          [src]="replies.user.image.png"
+          alt=""
+          class="avatar"
+          width="30"
+          height="30"
+        /><span class="nameClass">{{ replies.user.username }}</span
+        ><span class="myClass" *ngIf="replies.user.username == 'juliusomo'">you</span>
+        <span class="dateAdded">{{ replies.createdAt }}</span>
+      </div>
+
+      <div class="svgsDiv">
+        <span
+          class="replyClassDelete"
+          *ngIf="replies.user.username == 'juliusomo'"
+          (click)="deleteReply(index)"
+          ><img
+            src="../../assets/icon-delete.svg"
+            style="margin: 7px"
+          />Delete</span
+        >
+        <span
+          class="replyClass"
+          *ngIf="replies.user.username !== 'juliusomo'"
+          (click)="nestedReply(index, mainInd)"
+          ><img
+            src="../../../assets/icon-reply.svg"
+            style="margin: 7px"
+          />Reply</span
+        >
+        <span
+          class="replyClass"
+          *ngIf="replies.user.username == 'juliusomo'"
+          (click)="editComment(index,mainInd)"
+          ><img
+            src="../../../assets/icon-edit.svg"
+            style="margin: 7px"
+          />Edit</span
+        >
+      </div>
+    </div>
+
+    <div class="paragraph" *ngIf="clickEditBoolean">
+      <span class="mentionReply">{{ "@" + replies.replyingTo + " " }}</span>
+      <span>{{ replies.content }}</span>
+    </div>
+    <div class="paragraphEdit" *ngIf="updateClickBoolean">
+      <textarea
+        name=""
+        class="myTextareaReplyEdit"
+        style="width: 100%"
+        [(ngModel)]="editReplyInput"
+      ></textarea>
+      <button class="send" (click)="updateReplyComment(index,mainInd)">Update</button>
+    </div>
+  </div>
+</div>
+<app-add-nested-reply
+  *ngIf="nestedReplyBoolean"
+  [nestedReplyBoolean]="nestedReplyBoolean"
+  [index]="index"
+  [jsonData]="jsonData"
+  [mainInd]="mainInd"
+  [ngStyle]="{
+'width':'93%'
+  }"
+  (addNested)="addNestedReply($event)"
+></app-add-nested-reply>

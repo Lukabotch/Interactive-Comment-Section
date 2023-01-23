@@ -1,0 +1,58 @@
+.darkOverlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  .myBlock {
+    background-color: #fff;
+    width: 340px;
+    padding: 30px;
+    border-radius: 10px;
+    h1 {
+      color: #324152;
+      font-size: 19px;
+      font-weight: 700;
+      font-family: rubik;
+      margin: 0;
+    }
+    p {
+      color: #67727e;
+      line-height: 1.5;
+      font-family: rubik;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 15px 30px;
+      color: #fff;
+      border-radius: 10px;
+      outline: 1px solid rgba(0, 0, 0, 0);
+      border: none;
+      font-family: Rubik;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .yesDelete {
+      cursor: pointer;
+      transition: 0.3s;
+      background-color: #ed6468;
+      &:hover {
+        opacity: 0.65;
+      }
+    }
+    .cancel {
+      background-color: #67727e;
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.65;
+      }
+    }
+  }
+}

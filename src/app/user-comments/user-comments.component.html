@@ -1,0 +1,100 @@
+<div class="mainComment" *ngIf="data">
+  <div class="comment">
+    <div class="rating">
+      <img
+        alt=""
+        src="../../assets/icon-plus.svg"
+        class="plus"
+        (click)="increaseRating(index)"
+      />
+      <span>{{ jsonData.comments[index].score }}</span>
+      <img
+        src="../../assets/icon-minus.svg"
+        alt=""
+        class="minus"
+        (click)="decreaseRating(index)"
+      />
+    </div>
+    <div class="userpage">
+      <div class="userheader">
+        <div class="usernav">
+          <img
+            [src]="data.user.image.png"
+            alt=""
+            class="avatar"
+            width="30"
+            height="30"
+          /><span class="nameClass">{{ data.user.username }}</span
+          ><span class="myClass" *ngIf="data.user.username == 'juliusomo'"
+            >you</span
+          >
+          <span class="dateAdded">{{ data.createdAt }}</span>
+        </div>
+        <div class="svgsDiv">
+          <span
+            class="replyClassDelete"
+            *ngIf="data.user.username == 'juliusomo'"
+            (click)="deleteComment(index)"
+            ><img
+              src="../../assets/icon-delete.svg"
+              style="margin: 7px"
+            />Delete</span
+          >
+          <span
+            *ngIf="data.user.username !== 'juliusomo'"
+            class="replyClass"
+            (click)="replyComment(index)"
+            ><img
+              src="../../assets/icon-reply.svg"
+              style="margin: 7px"
+            />Reply</span
+          >
+          <span
+            *ngIf="data.user.username == 'juliusomo'"
+            class="replyClass"
+            (click)="editMyComment(index)"
+            ><img
+              src="../../assets/icon-edit.svg"
+              style="margin: 7px"
+            />Edit</span
+          >
+        </div>
+      </div>
+      <div class="paragraph" *ngIf="editMyBoolean; else elseblock">
+        <span>{{ jsonData.comments[index].content }}</span>
+      </div>
+      <ng-template #elseblock>
+        <div class="paragraphEdit">
+          <textarea
+            name=""
+            class="myTextareaReplyEdit"
+            style="width: 100%"
+            [(ngModel)]="editMyInput"
+          ></textarea>
+          <button class="send" (click)="updateComment(index)">Update</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <app-add-reply
+    *ngIf="replyBoolean"
+    [jsonData]="jsonData"
+    (addedReply)="addReply($event)"
+    [replyIndex]="index"
+  ></app-add-reply>
+  <div *ngIf="data.replies.length > 0" [ngStyle]="{ width: '100%' }">
+    <app-replies-of-comment
+      *ngFor="let replies of data.replies; let ind = index"
+      [jsonData]="jsonData"
+      [index]="ind"
+      [replies]="replies"
+      [mainInd]="index"
+      [ngStyle]="{
+        display: 'flex',
+        'align-items': 'flex-end',
+        'flex-direction': 'column'
+      }"
+      (jsonReply)="deleteReply($event)"
+    ></app-replies-of-comment>
+  </div>
+</div>
