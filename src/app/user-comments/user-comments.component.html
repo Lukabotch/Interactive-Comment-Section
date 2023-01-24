@@ -25,7 +25,7 @@
             width="30"
             height="30"
           /><span class="nameClass">{{ data.user.username }}</span
-          ><span class="myClass" *ngIf="data.user.username == 'juliusomo'"
+          ><span class="myClass" *ngIf="data.user.username == jsonData.currentUser.username"
             >you</span
           >
           <span class="dateAdded">{{ data.createdAt }}</span>
@@ -33,7 +33,7 @@
         <div class="svgsDiv">
           <span
             class="replyClassDelete"
-            *ngIf="data.user.username == 'juliusomo'"
+            *ngIf="data.user.username == jsonData.currentUser.username"
             (click)="deleteComment(index)"
             ><img
               src="../../assets/icon-delete.svg"
@@ -41,7 +41,7 @@
             />Delete</span
           >
           <span
-            *ngIf="data.user.username !== 'juliusomo'"
+            *ngIf="data.user.username !== jsonData.currentUser.username"
             class="replyClass"
             (click)="replyComment(index)"
             ><img
@@ -50,7 +50,7 @@
             />Reply</span
           >
           <span
-            *ngIf="data.user.username == 'juliusomo'"
+            *ngIf="data.user.username == jsonData.currentUser.username"
             class="replyClass"
             (click)="editMyComment(index)"
             ><img
