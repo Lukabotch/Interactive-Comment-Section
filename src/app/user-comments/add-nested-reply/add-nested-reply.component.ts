@@ -33,7 +33,7 @@ export class AddNestedReplyComponent {
             png: this.jsonData.currentUser.image.png,
             webp: this.jsonData.currentUser.image.webp,
           },
-          username: 'juliusomo',
+          username: this.jsonData.currentUser.username,
         },
       },
       index: mainId,
